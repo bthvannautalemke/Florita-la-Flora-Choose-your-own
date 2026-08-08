@@ -6,6 +6,34 @@ project brief. Single self-contained file, no build step, no dependencies.
 Open `index.html` directly in a browser, or serve the folder with any static
 file server.
 
+## v2 — Tesla-configurator layout
+
+Rebuilt structurally after feedback that v1 read as an editorial mockup, not
+a professional configurator, and didn't follow the Tesla Model 3 design page
+reference or the Stiletto theme. Network policy in this environment blocks
+fetching tesla.com, floritalaflora.nl, and Shopify's theme store directly, so
+this was rebuilt from Tesla's well-documented configurator structure rather
+than a live pixel reference:
+
+- Full-bleed split screen (bag stage ~62%, option rail ~38% on desktop,
+  stacked on mobile) — no card, no marketing headline; the configurator is
+  the whole page, like Tesla's.
+- Near-neutral ground (off-white / near-black text) with a single accent —
+  the product's own Cobalt Blue swatch — instead of the earlier warm
+  editorial palette.
+- Circular thin-ring swatches (not chips), selection shown as text next to
+  the swatch row (name + price delta), matching Tesla's paint-picker pattern.
+- Price prominent at the top of the option rail, under the product name —
+  Tesla's price-under-trim-name placement.
+- Drag-to-explore on the stage image itself (pointer events, not just arrow
+  clicks), plus arrows/dots/keyboard for discoverability and accessibility.
+- Soft contact shadow under the product on its "studio floor."
+
+**Still pending real brand fidelity**: exact hex/fonts from your Stiletto
+theme and floritalaflora.nl. Send a screenshot (or the theme's style name —
+Stiletto/Luster/Linen/Glimmer/Tapestry) and the palette/typography tokens at
+the top of `<style>` are the only thing that needs updating to match exactly.
+
 ## What's real vs. placeholder
 
 - **Interaction, layout, accessibility, pricing logic, and the request

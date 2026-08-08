@@ -6,365 +6,365 @@
 <title>Build Your Own — Florita la Flora</title>
 <meta name="description" content="Design your own Florita la Flora bag: choose a finish for the front, back, sides and strap, then request your one-of-a-kind design." />
 <style>
-  /* ============================= TOKENS ============================= */
+  /* ============================= TOKENS =============================
+     Placeholder palette pending your real brand hex/fonts (Stiletto theme
+     + floritalaflora.nl) — see README. Structure below is deliberately
+     Tesla-configurator-style: near-neutral ground, one accent, the
+     product is the only thing with color/personality. */
   :root{
-    --bg: #F3ECE1;
-    --surface: #FFFFFF;
-    --surface-2: #FBF6EC;
-    --text: #2A2118;
-    --text-muted: #746653;
-    --accent: #22437C;
+    --bg: #FAFAF8;
+    --stage-bg: #F3F1ED;
+    --panel-bg: #FFFFFF;
+    --text: #171512;
+    --text-muted: #85807A;
+    --text-faint: #B3AEA7;
+    --accent: #1F3D73;
     --accent-contrast: #FFFFFF;
-    --gold: #A9812F;
-    --border: #E1D6C1;
+    --hairline: #E7E4DE;
     --danger: #A6402F;
-    --success: #3B6E4F;
-    --shadow: 0 1px 2px rgba(42,33,24,.06), 0 12px 32px -12px rgba(42,33,24,.18);
-    --radius: 18px;
+    --success: #2F6B47;
+    --shadow-sheet: 0 24px 64px -24px rgba(23,21,18,.35);
+    --radius-sm: 8px;
+    --radius-md: 14px;
     --dur-fast: 140ms;
-    --dur: 260ms;
+    --dur: 320ms;
+    --dur-slow: 480ms;
     --ease: cubic-bezier(.22,.7,.2,1);
 
-    --font-display: 'Iowan Old Style','Palatino Linotype','Book Antiqua', Georgia, serif;
-    --font-body: -apple-system,'Segoe UI','Helvetica Neue',Arial,sans-serif;
-    --font-mono: 'JetBrains Mono','SF Mono',Consolas,'Liberation Mono',monospace;
+    --font-wordmark: Georgia,'Iowan Old Style','Times New Roman',serif;
+    --font-body: -apple-system,BlinkMacSystemFont,'Inter','Helvetica Neue','Segoe UI',Arial,sans-serif;
+    --font-num: -apple-system,'Inter','Helvetica Neue',Arial,sans-serif;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --bg: #1B1712;
-      --surface: #241F17;
-      --surface-2: #2A2419;
-      --text: #F1E9DA;
-      --text-muted: #B5A890;
-      --accent: #82A3E0;
-      --accent-contrast: #14203A;
-      --gold: #C9A24E;
-      --border: #3B3226;
+      --bg: #14130F;
+      --stage-bg: #1B1916;
+      --panel-bg: #1B1916;
+      --text: #F3F1EC;
+      --text-muted: #93897E;
+      --text-faint: #5A534B;
+      --accent: #7C9BD6;
+      --accent-contrast: #10192C;
+      --hairline: #302C26;
       --danger: #E5897F;
       --success: #86C39F;
-      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 20px 40px -16px rgba(0,0,0,.6);
+      --shadow-sheet: 0 24px 64px -24px rgba(0,0,0,.7);
     }
   }
   :root[data-theme="dark"]{
-    --bg: #1B1712;
-    --surface: #241F17;
-    --surface-2: #2A2419;
-    --text: #F1E9DA;
-    --text-muted: #B5A890;
-    --accent: #82A3E0;
-    --accent-contrast: #14203A;
-    --gold: #C9A24E;
-    --border: #3B3226;
+    --bg: #14130F;
+    --stage-bg: #1B1916;
+    --panel-bg: #1B1916;
+    --text: #F3F1EC;
+    --text-muted: #93897E;
+    --text-faint: #5A534B;
+    --accent: #7C9BD6;
+    --accent-contrast: #10192C;
+    --hairline: #302C26;
     --danger: #E5897F;
     --success: #86C39F;
-    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 20px 40px -16px rgba(0,0,0,.6);
+    --shadow-sheet: 0 24px 64px -24px rgba(0,0,0,.7);
   }
 
   *{ box-sizing: border-box; }
-  html,body{ margin:0; }
+  html,body{ margin:0; height:100%; }
   body{
     background: var(--bg);
     color: var(--text);
     font-family: var(--font-body);
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.5;
-    min-height: 100dvh;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
   @media (prefers-reduced-motion: reduce){
     *{ animation-duration: .001ms !important; transition-duration: .001ms !important; }
   }
-  a{ color: inherit; }
+  a{ color: inherit; text-decoration: none; }
   button{ font-family: inherit; }
   :focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
 
-  .visually-hidden{
-    position:absolute; width:1px; height:1px; overflow:hidden;
-    clip:rect(0 0 0 0); white-space:nowrap;
-  }
+  /* ============================= APP SHELL ============================= */
+  .app{ min-height: 100dvh; display:flex; flex-direction:column; }
 
-  /* ============================= LAYOUT ============================= */
-  .page{
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 0 20px 64px;
-  }
   .topbar{
     display:flex; align-items:center; justify-content:space-between;
-    padding: 22px 4px 18px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 28px;
+    height: 64px; flex: none;
+    padding: 0 28px;
+    border-bottom: 1px solid var(--hairline);
+    z-index: 5;
   }
   .wordmark{
-    font-family: var(--font-display);
-    font-size: 22px;
+    font-family: var(--font-wordmark);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 21px;
     letter-spacing: .01em;
   }
-  .wordmark small{
-    display:block;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-top: 2px;
-  }
   .topbar-link{
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: .06em;
+    display:flex; align-items:center; gap:6px;
+    font-size: 12.5px;
+    letter-spacing: .04em;
     text-transform: uppercase;
-    text-decoration: none;
     color: var(--text-muted);
-    border-bottom: 1px solid transparent;
-    transition: border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+    transition: color var(--dur-fast) var(--ease);
   }
-  .topbar-link:hover{ color: var(--text); border-color: var(--gold); }
+  .topbar-link svg{ width:13px; height:13px; }
+  .topbar-link:hover{ color: var(--text); }
 
-  .intro{
-    display:grid;
-    gap: 6px;
-    margin-bottom: 30px;
-    max-width: 640px;
+  .split{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
-  .eyebrow{
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  h1{
-    font-family: var(--font-display);
-    font-weight: 500;
-    font-size: clamp(28px, 4vw, 40px);
-    line-height: 1.15;
-    margin: 2px 0 4px;
-    text-wrap: balance;
-  }
-  .intro p{
-    color: var(--text-muted);
-    margin: 0;
-    max-width: 54ch;
-  }
-
-  .configurator{
-    display:grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    overflow: hidden;
+  @media (min-width: 980px){
+    .split{ flex-direction: row; height: calc(100dvh - 64px); }
   }
 
   /* ------------------------- STAGE ------------------------- */
-  .stage{
+  .stage-pane{
     position: relative;
-    background:
-      radial-gradient(120% 100% at 50% 20%, var(--surface-2), var(--bg) 78%);
-    padding: clamp(20px, 5vw, 48px) 20px 12px;
+    background: var(--stage-bg);
     display:flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    padding: 28px 20px 8px;
+    flex: none;
   }
+  @media (min-width: 980px){
+    .stage-pane{ flex: 1 1 auto; padding: 0; }
+  }
+
   .stage-frame-wrap{
     position: relative;
-    width: min(72vw, 380px);
+    width: min(78vw, 460px);
     aspect-ratio: 1 / 1;
+    touch-action: pan-y;
+    cursor: grab;
   }
+  @media (min-width: 980px){
+    .stage-frame-wrap{ width: min(46vw, 560px); }
+  }
+  .stage-frame-wrap:active{ cursor: grabbing; }
+
+  .stage-shadow{
+    position:absolute; left:50%; top: 71.5%;
+    width: 34%; height: 4%;
+    transform: translateX(-50%);
+    background: radial-gradient(closest-side, rgba(23,21,18,.28), transparent 65%);
+    filter: blur(1.5px);
+    pointer-events:none;
+  }
+  :root:not([data-theme="light"]) .stage-shadow{ background: radial-gradient(closest-side, rgba(0,0,0,.55), transparent 65%); }
+  :root[data-theme="dark"] .stage-shadow{ background: radial-gradient(closest-side, rgba(0,0,0,.55), transparent 65%); }
+
   .stage-frame{
     position:absolute; inset:0;
     opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--dur) var(--ease);
+    transition: opacity var(--dur-slow) var(--ease);
+    pointer-events: none;
   }
-  .stage-frame.is-active{
-    opacity: 1;
-    visibility: visible;
-  }
+  .stage-frame.is-active{ opacity: 1; pointer-events: auto; }
   .stage-frame svg{ width:100%; height:100%; display:block; }
-  .zone-fill{ transition: opacity var(--dur-fast) linear; }
-  .zone-fill.is-swapping{ opacity: 0; }
+  .zone-fill{ transition: opacity 200ms linear; }
+  .zone-fill.is-swapping{ opacity: .18; }
 
-  .stage-nav{
-    display:flex; align-items:center; gap: 18px;
-    margin-top: 10px;
-  }
-  .arrow-btn{
-    width:44px; height:44px;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--text);
+  .stage-edge-btn{
+    position:absolute; top:50%; transform: translateY(-50%);
+    width:40px; height:40px; border-radius:999px;
+    border:none; background: transparent;
+    color: var(--text-faint);
     display:flex; align-items:center; justify-content:center;
-    cursor: pointer;
-    transition: background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+    cursor:pointer;
+    opacity: 0;
+    transition: opacity var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
   }
-  .arrow-btn:hover{ border-color: var(--gold); }
-  .arrow-btn:active{ transform: scale(.94); }
-  .arrow-btn svg{ width:18px; height:18px; }
+  .stage-frame-wrap:hover .stage-edge-btn,
+  .stage-edge-btn:focus-visible{ opacity: 1; }
+  .stage-edge-btn:hover{ color: var(--text); }
+  .stage-edge-btn.prev{ left: -8px; }
+  .stage-edge-btn.next{ right: -8px; }
+  @media (min-width: 980px){
+    .stage-edge-btn.prev{ left: 4%; }
+    .stage-edge-btn.next{ right: 4%; }
+  }
+  .stage-edge-btn svg{ width:20px; height:20px; }
 
-  .angle-meta{
-    text-align:center;
-    min-width: 160px;
+  .stage-foot{
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    padding: 14px 0 22px;
   }
-  .angle-label{
-    font-family: var(--font-display);
-    font-size: 15px;
+  @media (min-width: 980px){
+    .stage-foot{ position:absolute; left:0; right:0; bottom: 30px; }
   }
-  .angle-dots{
-    display:flex; gap:6px; justify-content:center; margin-top:8px;
+  .drag-hint{
+    font-size: 11.5px; letter-spacing:.08em; text-transform: uppercase;
+    color: var(--text-faint);
+    display:flex; align-items:center; gap:6px;
   }
+  .drag-hint svg{ width:13px; height:13px; }
+  .angle-dots{ display:flex; gap:7px; }
   .angle-dots button{
     width:6px; height:6px; border-radius:50%;
     border: none; padding:0; cursor:pointer;
-    background: var(--border);
+    background: var(--text-faint);
     transition: background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
   }
-  .angle-dots button.is-active{ background: var(--gold); transform: scale(1.5); }
-  .angle-dots button:focus-visible{ outline-offset: 3px; }
+  .angle-dots button.is-active{ background: var(--accent); transform: scale(1.6); }
 
-  /* ------------------------- DOCK ------------------------- */
-  .dock{
-    border-top: 1px solid var(--border);
-    padding: clamp(18px, 4vw, 30px) clamp(18px, 4vw, 34px) 26px;
+  /* ------------------------- PANEL (right rail) ------------------------- */
+  .panel{
+    flex: none;
+    background: var(--panel-bg);
+    display:flex;
+    flex-direction: column;
+    border-top: 1px solid var(--hairline);
   }
-  .zones{
-    display:grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-    margin-bottom: 22px;
+  @media (min-width: 980px){
+    .panel{
+      width: 400px; flex: none;
+      border-top:none; border-left: 1px solid var(--hairline);
+      overflow-y: auto;
+    }
   }
-  @media (max-width: 720px){
-    .zones{ grid-template-columns: repeat(2, 1fr); }
-  }
-  .zone-row{ display:flex; flex-direction:column; gap:8px; }
-  .zone-row-label{
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: .1em;
-    text-transform: uppercase;
+
+  .panel-scroll{ padding: 30px 30px 10px; flex:1; }
+
+  .panel-top{ margin-bottom: 28px; }
+  .eyebrow{
+    font-size: 11.5px; letter-spacing:.12em; text-transform:uppercase;
     color: var(--text-muted);
+    display:block; margin-bottom: 6px;
   }
-  .swatch-row{ display:flex; gap:8px; }
-  .swatch{
-    width:38px; height:38px;
-    border-radius: 10px;
-    border: 2px solid var(--border);
-    cursor: pointer;
-    position: relative;
-    padding:0;
-    background-size: cover;
-    transition: border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
-  }
-  .swatch:hover{ transform: translateY(-2px); }
-  .swatch[aria-pressed="true"]{ border-color: var(--accent); }
-  .swatch[aria-pressed="true"]::after{
-    content:"";
-    position:absolute; inset:-6px;
-    border: 1px solid var(--accent);
-    border-radius: 13px;
-  }
-  .swatch .check{
-    position:absolute; bottom:-2px; right:-2px;
-    width:16px; height:16px; border-radius:50%;
-    background: var(--accent); color: var(--accent-contrast);
-    display:none; align-items:center; justify-content:center;
-  }
-  .swatch[aria-pressed="true"] .check{ display:flex; }
-  .swatch .check svg{ width:10px; height:10px; }
-
-  .swatch-cobalt{ background-color: #22437C; }
-  .swatch-leopard{ background-image: repeating-radial-gradient(circle at 20% 30%, #4a2e18 0 6px, transparent 7px 14px), repeating-radial-gradient(circle at 70% 65%, #2a1810 0 5px, transparent 6px 13px); background-color: #c9a16b; }
-  .swatch-zebra{ background-image: repeating-linear-gradient(28deg, #231b14 0 5px, transparent 5px 12px); background-color: #efe7d8; }
-
-  .price-row{
-    display:flex; align-items:baseline; justify-content:space-between;
-    flex-wrap: wrap; gap: 10px;
-    border-top: 1px solid var(--border);
-    padding-top: 18px;
+  .product-name{
+    font-size: 21px; font-weight: 600; letter-spacing: -.01em;
+    margin: 0 0 14px;
   }
   .price-figure{
-    font-family: var(--font-mono);
-    font-size: 26px;
+    font-family: var(--font-num);
+    font-size: 30px; font-weight: 600;
     font-variant-numeric: tabular-nums;
+    letter-spacing: -.01em;
   }
   .price-note{
-    font-size: 12px;
-    color: var(--text-muted);
-    display:block;
-    margin-top: 2px;
+    display:block; font-size: 12px; color: var(--text-muted); margin-top: 4px;
   }
+
+  .zones{ display:flex; flex-direction:column; }
+  .zone-row{
+    padding: 18px 0;
+    border-top: 1px solid var(--hairline);
+  }
+  .zone-row:first-child{ border-top: 1px solid var(--hairline); }
+  .zone-row-top{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom: 12px;
+  }
+  .zone-label{
+    font-size: 11.5px; letter-spacing:.1em; text-transform:uppercase;
+    color: var(--text-muted);
+  }
+  .zone-selection{ font-size: 13.5px; font-weight: 500; }
+  .zone-selection .delta{
+    color: var(--text-muted); font-weight: 400; margin-left: 5px;
+    font-variant-numeric: tabular-nums;
+  }
+  .swatch-row{ display:flex; gap: 14px; }
+  .swatch{
+    width:32px; height:32px; border-radius:50%;
+    border: none; padding:0; cursor:pointer;
+    position: relative;
+    background-size: cover; background-position:center;
+    box-shadow: inset 0 0 0 1px rgba(23,21,18,.14);
+  }
+  :root:not([data-theme="light"]) .swatch{ box-shadow: inset 0 0 0 1px rgba(255,255,255,.18); }
+  :root[data-theme="dark"] .swatch{ box-shadow: inset 0 0 0 1px rgba(255,255,255,.18); }
+  .swatch::after{
+    content:"";
+    position:absolute; inset:-5px;
+    border-radius:50%;
+    border: 1.5px solid transparent;
+    transition: border-color var(--dur-fast) var(--ease);
+  }
+  .swatch[aria-checked="true"]::after{ border-color: var(--accent); }
+  .swatch:hover::after{ border-color: var(--text-faint); }
+  .swatch[aria-checked="true"]:hover::after{ border-color: var(--accent); }
+
+  .swatch-cobalt{ background-color: #1F3D73; }
+  .swatch-leopard{
+    background-color: #c9a16b;
+    background-image:
+      radial-gradient(ellipse 7px 6px at 25% 30%, #3c2712 60%, transparent 62%),
+      radial-gradient(ellipse 6px 5px at 65% 20%, #3c2712 60%, transparent 62%),
+      radial-gradient(ellipse 7px 6px at 75% 65%, #3c2712 60%, transparent 62%),
+      radial-gradient(ellipse 6px 5px at 30% 72%, #3c2712 60%, transparent 62%),
+      radial-gradient(ellipse 5px 5px at 50% 48%, #3c2712 60%, transparent 62%);
+  }
+  .swatch-zebra{
+    background-color: #efe7d8;
+    background-image: repeating-linear-gradient(32deg, #221a13 0 3px, transparent 3px 8px);
+  }
+
+  .panel-footer{
+    padding: 18px 30px;
+    border-top: 1px solid var(--hairline);
+    background: var(--panel-bg);
+  }
+  @media (min-width: 980px){ .panel-footer{ flex: none; } }
   .cta{
+    width:100%;
     background: var(--accent);
     color: var(--accent-contrast);
     border: none;
     border-radius: 999px;
-    padding: 14px 28px;
+    padding: 15px 0;
     font-size: 15px;
     font-weight: 600;
     letter-spacing: .01em;
     cursor: pointer;
-    transition: transform var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease);
+    transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
   }
   .cta:hover{ opacity:.92; }
-  .cta:active{ transform: scale(.98); }
-
-  /* ------------------------- SUMMARY STRIP ------------------------- */
-  .summary{
-    display:flex; gap: 22px; flex-wrap: wrap;
-    margin-top: 26px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-  }
-  .summary dt{
-    font-family: var(--font-mono);
-    font-size: 10px; letter-spacing:.1em; text-transform: uppercase;
-    color: var(--text-muted);
-  }
-  .summary dd{
-    margin: 2px 0 0; font-size: 14px;
+  .cta:active{ transform: scale(.99); }
+  .footnote{
+    text-align:center; font-size: 11.5px; color: var(--text-faint);
+    margin-top: 10px;
   }
 
-  /* ------------------------- FORM PANEL ------------------------- */
+  /* ------------------------- REQUEST FORM ------------------------- */
   .overlay{
     position: fixed; inset:0;
-    background: rgba(20,16,10,.5);
+    background: rgba(15,13,10,.55);
     display:flex; align-items: flex-end; justify-content:center;
     opacity:0; visibility:hidden;
     transition: opacity var(--dur) var(--ease);
     z-index: 40;
   }
   .overlay.is-open{ opacity:1; visibility:visible; }
-  @media (min-width: 720px){
-    .overlay{ align-items:center; }
-  }
+  @media (min-width: 720px){ .overlay{ align-items:center; } }
   .sheet{
-    background: var(--surface);
+    background: var(--panel-bg);
     width: 100%;
-    max-width: 520px;
+    max-width: 480px;
     max-height: 92dvh;
     overflow-y: auto;
     border-radius: 20px 20px 0 0;
     padding: 28px 26px 32px;
     transform: translateY(24px);
     transition: transform var(--dur) var(--ease);
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-sheet);
   }
-  @media (min-width: 720px){
-    .sheet{ border-radius: 20px; margin: 20px; }
-  }
+  @media (min-width: 720px){ .sheet{ border-radius: 16px; margin: 20px; } }
   .overlay.is-open .sheet{ transform: translateY(0); }
   .sheet-head{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px; }
-  .sheet h2{ font-family: var(--font-display); font-size: 22px; margin:0; }
+  .sheet h2{ font-size: 19px; font-weight:600; margin:0; letter-spacing:-.01em; }
   .sheet-close{
     background:none; border:none; cursor:pointer; color: var(--text-muted);
     width:32px; height:32px; display:flex; align-items:center; justify-content:center; border-radius:50%;
   }
-  .sheet-close:hover{ background: var(--surface-2); }
-  .sheet p.lead{ color: var(--text-muted); font-size: 14px; margin: 4px 0 20px; }
+  .sheet-close:hover{ background: var(--hairline); }
+  .sheet p.lead{ color: var(--text-muted); font-size: 13.5px; margin: 4px 0 20px; }
 
   .field{ margin-bottom: 16px; }
   .field label{ display:block; font-size: 13px; font-weight:600; margin-bottom: 6px; }
@@ -373,9 +373,9 @@
     width:100%;
     font-family: inherit; font-size: 15px;
     padding: 11px 13px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: var(--surface-2);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--hairline);
+    background: var(--bg);
     color: var(--text);
   }
   .field input:focus, .field textarea:focus{ outline: 2px solid var(--accent); outline-offset:1px; }
@@ -383,44 +383,35 @@
   .field-error{ color: var(--danger); font-size: 12px; margin-top: 5px; display:none; }
   .field.has-error input, .field.has-error textarea{ border-color: var(--danger); }
   .field.has-error .field-error{ display:block; }
-  .field-row{ display:flex; gap:12px; }
-  .field-row .field{ flex:1; }
 
   .consent{ display:flex; gap:10px; align-items:flex-start; font-size: 13px; color: var(--text-muted); margin: 18px 0; }
   .consent input{ margin-top: 3px; }
 
   .form-actions{ display:flex; justify-content:flex-end; gap:10px; margin-top: 6px; }
   .btn-secondary{
-    background:none; border: 1px solid var(--border); border-radius: 999px;
+    background:none; border: 1px solid var(--hairline); border-radius: 999px;
     padding: 12px 20px; font-size:14px; cursor:pointer; color: var(--text);
   }
+  .form-actions .cta{ width:auto; padding: 12px 24px; }
 
   .confirm{ text-align:center; padding: 10px 4px 4px; }
   .confirm .icon{
-    width:52px; height:52px; border-radius:50%;
+    width:48px; height:48px; border-radius:50%;
     background: var(--success); color:#fff;
     display:flex; align-items:center; justify-content:center;
     margin: 0 auto 16px;
   }
-  .confirm .icon svg{ width:26px; height:26px; }
+  .confirm .icon svg{ width:24px; height:24px; }
   .confirm h2{ margin-bottom:8px; }
-  .confirm p{ color: var(--text-muted); font-size:14px; max-width: 38ch; margin: 0 auto 18px; }
+  .confirm p{ color: var(--text-muted); font-size:13.5px; max-width: 38ch; margin: 0 auto 18px; }
   .confirm .recap{
-    text-align:left; background: var(--surface-2); border-radius:12px; padding:14px 16px;
-    font-family: var(--font-mono); font-size:12.5px; line-height:1.7;
+    text-align:left; background: var(--stage-bg); border-radius:12px; padding:14px 16px;
+    font-size:13px; line-height:1.7;
     margin-bottom: 18px;
   }
-  .confirm .recap b{ font-family: var(--font-body); font-weight:600; }
   .dev-note{
-    font-size: 11px; color: var(--text-muted); border-top: 1px dashed var(--border);
+    font-size: 11px; color: var(--text-faint); border-top: 1px dashed var(--hairline);
     padding-top: 12px; margin-top: 4px; text-align:left;
-  }
-
-  footer{
-    margin-top: 40px;
-    color: var(--text-muted);
-    font-size: 12px;
-    text-align:center;
   }
 </style>
 </head>
@@ -429,81 +420,79 @@
 <!-- Shared pattern/definitions sprite — referenced via fill="url(#...)" from every stage frame -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <pattern id="pattern-leopard" width="46" height="46" patternUnits="userSpaceOnUse">
-      <rect width="46" height="46" fill="#c9a16b"/>
-      <path d="M8,10 q6,-6 12,-1 q4,4 -1,8 q-6,4 -11,-1 q-3,-3 0,-6 Z" fill="#4a2e18"/>
-      <path d="M9,11 q4,-3 8,0 q2,2 -1,4 q-4,3 -7,-1 q-1,-2 0,-3 Z" fill="#2a1810"/>
-      <path d="M28,6 q7,-3 10,4 q2,5 -4,7 q-7,2 -9,-4 q-1,-4 3,-7 Z" fill="#4a2e18"/>
-      <path d="M29,8 q4,-2 6,2 q1,3 -2,4 q-4,1 -5,-2 q-1,-2 1,-4 Z" fill="#2a1810"/>
-      <path d="M6,32 q7,-4 11,2 q2,5 -4,7 q-6,2 -9,-4 q-1,-3 2,-5 Z" fill="#4a2e18"/>
-      <path d="M7,33 q4,-2 6,1 q1,3 -2,4 q-3,1 -4,-2 q0,-2 0,-3 Z" fill="#2a1810"/>
-      <path d="M30,30 q6,-5 11,0 q3,4 -2,8 q-6,4 -10,-1 q-2,-4 1,-7 Z" fill="#4a2e18"/>
-      <path d="M31,32 q4,-3 7,0 q2,3 -1,5 q-4,3 -6,-1 q-1,-2 0,-4 Z" fill="#2a1810"/>
+    <pattern id="pattern-leopard" width="34" height="34" patternUnits="userSpaceOnUse" patternTransform="rotate(-6)">
+      <rect width="34" height="34" fill="#c9a16b"/>
+      <path d="M6,7 q4,-4 8,-1 q3,3 -1,5 q-4,3 -8,-1 q-2,-2 1,-3 Z" fill="#3c2712"/>
+      <path d="M7,8 q3,-2 5,0 q1,2 -1,3 q-3,2 -5,-1 q-1,-1 1,-2 Z" fill="#241407"/>
+      <path d="M20,5 q5,-2 7,2 q1,4 -3,5 q-5,2 -7,-2 q-1,-3 3,-5 Z" fill="#3c2712"/>
+      <path d="M21,6 q3,-1 4,2 q1,2 -2,3 q-3,1 -4,-1 q-1,-2 2,-3 Z" fill="#241407"/>
+      <path d="M4,21 q5,-3 8,1 q2,4 -2,6 q-4,2 -7,-2 q-1,-3 1,-5 Z" fill="#3c2712"/>
+      <path d="M5,22 q3,-2 5,1 q1,2 -1,3 q-3,1 -4,-1 q-1,-2 0,-3 Z" fill="#241407"/>
+      <path d="M21,20 q4,-4 8,0 q3,3 -1,6 q-4,3 -7,-1 q-2,-2 0,-5 Z" fill="#3c2712"/>
+      <path d="M22,21 q2,-2 5,0 q1,2 -1,4 q-2,2 -4,-1 q-1,-2 0,-3 Z" fill="#241407"/>
+      <path d="M13,27 q4,-2 6,1 q1,3 -2,4 q-3,1 -5,-1 q-1,-2 1,-4 Z" fill="#3c2712"/>
     </pattern>
     <pattern id="pattern-zebra" width="34" height="34" patternUnits="userSpaceOnUse" patternTransform="rotate(24)">
       <rect width="34" height="34" fill="#efe7d8"/>
-      <path d="M0,4 Q17,0 34,4 L34,9 Q17,5 0,9 Z" fill="#231b14"/>
-      <path d="M0,16 Q17,11 34,16 L34,22 Q17,17 0,22 Z" fill="#231b14"/>
-      <path d="M0,28 Q17,24 34,28 L34,33 Q17,29 0,33 Z" fill="#231b14"/>
+      <path d="M0,4 Q17,0 34,4 L34,9 Q17,5 0,9 Z" fill="#221a13"/>
+      <path d="M0,16 Q17,11 34,16 L34,22 Q17,17 0,22 Z" fill="#221a13"/>
+      <path d="M0,28 Q17,24 34,28 L34,33 Q17,29 0,33 Z" fill="#221a13"/>
     </pattern>
   </defs>
 </svg>
 
-<div class="page">
+<div class="app">
 
   <header class="topbar">
-    <div class="wordmark">Florita la Flora<small>Build Your Own — working prototype</small></div>
-    <a class="topbar-link" href="https://floritalaflora.nl/" rel="noopener">← back to shop</a>
+    <div class="wordmark">Florita la Flora</div>
+    <a class="topbar-link" href="https://floritalaflora.nl/" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      Back to shop
+    </a>
   </header>
 
-  <div class="intro">
-    <span class="eyebrow">Create your own</span>
-    <h1>Design a bag that's only ever going to be yours.</h1>
-    <p>Choose a finish for the front, back, sides and strap. Turn it to see every side, then send us your design — we'll get back to you to confirm details and payment.</p>
-  </div>
-
-  <main class="configurator" aria-label="Bag configurator">
+  <div class="split">
 
     <!-- ============================= STAGE ============================= -->
-    <section class="stage">
+    <section class="stage-pane" aria-label="Bag preview">
       <div class="stage-frame-wrap" id="stageWrap">
 
         <!-- Frame 1 — Front -->
         <div class="stage-frame is-active" data-angle="0">
           <svg viewBox="0 0 400 400" role="img" aria-label="Front view of the bag">
-            <path data-zone="sides" class="zone-fill" d="M132,158 Q116,166 114,205 L119,292 Q122,314 133,320 L138,300 Q131,296 130,285 L127,205 Q129,175 140,166 Z"/>
-            <path data-zone="sides" class="zone-fill" d="M268,158 Q284,166 286,205 L281,292 Q278,314 267,320 L262,300 Q269,296 270,285 L273,205 Q271,175 260,166 Z"/>
-            <path data-zone="strap" class="zone-fill" d="M162,118 Q200,44 238,118 L228,124 Q200,64 172,124 Z"/>
-            <rect x="192" y="102" width="16" height="20" rx="3" fill="var(--gold)"/>
-            <path data-zone="front" class="zone-fill" d="M140,150 Q140,120 170,114 L230,114 Q260,120 260,150 L268,288 Q268,320 234,326 L166,326 Q132,320 132,288 Z"/>
-            <g fill="#2f1c10" data-fixed="bow">
-              <path d="M200,258 C182,236 148,238 142,258 C148,278 182,280 200,258 Z"/>
-              <path d="M200,258 C218,236 252,238 258,258 C252,278 218,280 200,258 Z"/>
-              <path d="M194,266 C188,282 184,296 189,308 C193,296 197,282 199,268 Z"/>
-              <path d="M206,266 C212,282 216,296 211,308 C207,296 203,282 201,268 Z"/>
-              <rect x="190" y="248" width="20" height="20" rx="6"/>
+            <path data-zone="sides" class="zone-fill" d="M142,158 Q128,164 126,200 L130,255 Q133,272 143,278 L146,258 Q140,254 139,240 L137,200 Q139,178 148,168 Z"/>
+            <path data-zone="sides" class="zone-fill" d="M258,158 Q272,164 274,200 L270,255 Q267,272 257,278 L254,258 Q260,254 261,240 L263,200 Q261,178 252,168 Z"/>
+            <path data-zone="strap" class="zone-fill" fill-rule="evenodd" d="M172,140 Q172,82 200,76 Q228,82 228,140 L219,140 Q219,94 200,90 Q181,94 181,140 Z"/>
+            <rect x="219" y="99" width="14" height="18" rx="2" fill="#B8923F" transform="rotate(10 226 108)"/>
+            <path data-zone="front" class="zone-fill" d="M150,150 Q150,138 165,136 L235,136 Q250,138 250,150 L258,225 Q258,268 200,278 Q142,268 142,225 Z"/>
+            <g fill="#2a1810" data-fixed="bow">
+              <path d="M200,143 C186,126 160,128 154,143 C160,158 186,160 200,143 Z"/>
+              <path d="M200,143 C214,126 240,128 246,143 C240,158 214,160 200,143 Z"/>
+              <path d="M195,149 C190,161 187,172 191,182 C195,172 198,161 199,151 Z"/>
+              <path d="M205,149 C210,161 213,172 209,182 C205,172 202,161 201,151 Z"/>
+              <rect x="192" y="135" width="16" height="15" rx="5"/>
             </g>
-            <rect data-fixed="tag" x="238" y="298" width="20" height="13" rx="2" fill="#EFE3CE" stroke="#2f1c10" stroke-width="1"/>
+            <circle data-fixed="tag" cx="223" cy="248" r="9" fill="#EFE3CE" stroke="#2a1810" stroke-width="1"/>
           </svg>
         </div>
 
         <!-- Frame 2 — Front, angled (¾) -->
         <div class="stage-frame" data-angle="1">
           <svg viewBox="0 0 400 400" role="img" aria-label="Front view, turned to the side">
-            <path data-zone="sides" class="zone-fill" d="M136,160 Q124,167 122,204 L127,288 Q129,308 137,316 L141,298 Q135,294 134,284 L132,205 Q133,178 142,168 Z"/>
-            <path data-zone="sides" class="zone-fill" d="M262,150 Q292,158 296,206 L289,296 Q285,318 268,326 L266,304 Q280,298 282,286 L278,204 Q276,170 258,160 Z"/>
-            <path data-zone="strap" class="zone-fill" d="M158,120 Q196,46 232,116 L222,123 Q194,66 168,126 Z"/>
-            <rect x="186" y="104" width="16" height="20" rx="3" fill="var(--gold)"/>
-            <g transform="translate(-8,0) scale(.94,1) skewY(-3)">
-              <path data-zone="front" class="zone-fill" d="M144,150 Q144,120 172,114 L226,114 Q252,121 254,151 L260,286 Q259,317 228,324 L168,324 Q136,318 136,287 Z"/>
-              <g fill="#2f1c10" data-fixed="bow">
-                <path d="M197,262 C180,241 148,243 142,262 C148,281 180,283 197,262 Z"/>
-                <path d="M197,262 C214,241 246,243 252,262 C246,281 214,283 197,262 Z"/>
-                <path d="M191,270 C186,285 182,298 187,309 C191,298 195,285 197,272 Z"/>
-                <path d="M203,270 C208,285 212,298 207,309 C203,298 199,285 197,272 Z"/>
-                <rect x="187" y="252" width="19" height="19" rx="6"/>
+            <path data-zone="sides" class="zone-fill" d="M146,160 Q135,165 133,199 L136,252 Q138,268 147,274 L150,256 Q145,252 144,239 L142,199 Q144,180 152,170 Z"/>
+            <path data-zone="sides" class="zone-fill" d="M262,150 Q286,157 289,199 L284,258 Q281,278 267,284 L264,262 Q276,257 278,244 L275,198 Q273,172 258,163 Z"/>
+            <path data-zone="strap" class="zone-fill" fill-rule="evenodd" d="M168,142 Q166,84 194,76 Q222,80 226,138 L217,139 Q214,92 194,90 Q177,96 177,143 Z"/>
+            <rect x="214" y="99" width="14" height="18" rx="2" fill="#B8923F" transform="rotate(10 221 108)"/>
+            <g transform="translate(-4,0) scale(.92,1) skewY(-3)">
+              <path data-zone="front" class="zone-fill" d="M152,150 Q152,138 166,136 L228,136 Q244,139 246,152 L253,224 Q253,265 197,276 Q143,265 143,224 Z"/>
+              <g fill="#2a1810" data-fixed="bow">
+                <path d="M197,146 C184,130 159,132 153,146 C159,160 184,162 197,146 Z"/>
+                <path d="M197,146 C210,130 235,132 241,146 C235,160 210,162 197,146 Z"/>
+                <path d="M192,152 C187,163 184,174 188,183 C192,174 195,163 196,154 Z"/>
+                <path d="M202,152 C207,163 210,174 206,183 C202,174 199,163 198,154 Z"/>
+                <rect x="189" y="138" width="16" height="15" rx="5"/>
               </g>
-              <rect x="230" y="292" width="19" height="12" rx="2" fill="#EFE3CE" stroke="#2f1c10" stroke-width="1"/>
+              <circle cx="219" cy="250" r="9" fill="#EFE3CE" stroke="#2a1810" stroke-width="1"/>
             </g>
           </svg>
         </div>
@@ -511,23 +500,23 @@
         <!-- Frame 3 — Side -->
         <div class="stage-frame" data-angle="2">
           <svg viewBox="0 0 400 400" role="img" aria-label="Side view of the bag">
-            <path data-zone="front" class="zone-fill" d="M150,146 Q142,150 141,200 L145,300 Q147,320 156,326 L160,150 Z"/>
-            <path data-zone="back" class="zone-fill" d="M250,146 Q258,150 259,200 L255,300 Q253,320 244,326 L240,150 Z"/>
-            <path data-zone="strap" class="zone-fill" d="M168,116 Q200,42 232,116 L222,123 Q200,64 178,123 Z"/>
-            <rect x="192" y="100" width="16" height="20" rx="3" fill="var(--gold)"/>
-            <path data-zone="sides" class="zone-fill" d="M156,140 Q200,118 244,140 Q266,232 244,328 Q200,350 156,328 Q134,232 156,140 Z"/>
+            <path data-zone="front" class="zone-fill" d="M158,150 Q147,156 146,200 L149,255 Q151,274 161,280 L166,150 Z"/>
+            <path data-zone="back" class="zone-fill" d="M242,150 Q253,156 254,200 L251,255 Q249,274 239,280 L234,150 Z"/>
+            <path data-zone="strap" class="zone-fill" fill-rule="evenodd" d="M176,140 Q176,84 200,78 Q224,84 224,140 L215,140 Q215,95 200,92 Q185,95 185,140 Z"/>
+            <rect x="217" y="102" width="13" height="17" rx="2" fill="#B8923F" transform="rotate(9 223 110)"/>
+            <path data-zone="sides" class="zone-fill" d="M160,148 Q200,130 240,148 Q256,213 240,278 Q200,296 160,278 Q144,213 160,148 Z"/>
           </svg>
         </div>
 
         <!-- Frame 4 — Back, angled (¾) -->
         <div class="stage-frame" data-angle="3">
           <svg viewBox="0 0 400 400" role="img" aria-label="Back view, turned to the side">
-            <path data-zone="sides" class="zone-fill" d="M264,160 Q276,167 278,204 L273,288 Q271,308 263,316 L259,298 Q265,294 266,284 L268,205 Q267,178 258,168 Z"/>
-            <path data-zone="sides" class="zone-fill" d="M138,150 Q108,158 104,206 L111,296 Q115,318 132,326 L134,304 Q120,298 118,286 L122,204 Q124,170 142,160 Z"/>
-            <path data-zone="strap" class="zone-fill" d="M242,120 Q204,46 168,116 L178,123 Q206,66 232,126 Z"/>
-            <rect x="198" y="104" width="16" height="20" rx="3" fill="var(--gold)"/>
-            <g transform="translate(8,0) scale(.94,1) skewY(3)">
-              <path data-zone="back" class="zone-fill" d="M256,150 Q256,120 228,114 L174,114 Q148,121 146,151 L140,286 Q141,317 172,324 L232,324 Q264,318 264,287 Z"/>
+            <path data-zone="sides" class="zone-fill" d="M254,160 Q265,165 267,199 L264,252 Q262,268 253,274 L250,256 Q255,252 256,239 L258,199 Q256,180 248,170 Z"/>
+            <path data-zone="sides" class="zone-fill" d="M138,150 Q114,157 111,199 L116,258 Q119,278 133,284 L136,262 Q124,257 122,244 L125,198 Q127,172 142,163 Z"/>
+            <path data-zone="strap" class="zone-fill" fill-rule="evenodd" d="M232,142 Q234,84 206,76 Q178,80 174,138 L183,139 Q186,92 206,90 Q223,96 223,143 Z"/>
+            <rect x="186" y="99" width="14" height="18" rx="2" fill="#B8923F" transform="rotate(-10 193 108)"/>
+            <g transform="translate(4,0) scale(.92,1) skewY(3)">
+              <path data-zone="back" class="zone-fill" d="M248,150 Q248,138 234,136 L172,136 Q156,139 154,152 L147,224 Q147,265 203,276 Q257,265 257,224 Z"/>
             </g>
           </svg>
         </div>
@@ -535,61 +524,66 @@
         <!-- Frame 5 — Back -->
         <div class="stage-frame" data-angle="4">
           <svg viewBox="0 0 400 400" role="img" aria-label="Back view of the bag">
-            <path data-zone="sides" class="zone-fill" d="M132,158 Q116,166 114,205 L119,292 Q122,314 133,320 L138,300 Q131,296 130,285 L127,205 Q129,175 140,166 Z"/>
-            <path data-zone="sides" class="zone-fill" d="M268,158 Q284,166 286,205 L281,292 Q278,314 267,320 L262,300 Q269,296 270,285 L273,205 Q271,175 260,166 Z"/>
-            <path data-zone="strap" class="zone-fill" d="M162,118 Q200,44 238,118 L228,124 Q200,64 172,124 Z"/>
-            <rect x="192" y="102" width="16" height="20" rx="3" fill="var(--gold)"/>
-            <path data-zone="back" class="zone-fill" d="M140,150 Q140,120 170,114 L230,114 Q260,120 260,150 L268,288 Q268,320 234,326 L166,326 Q132,320 132,288 Z"/>
+            <path data-zone="sides" class="zone-fill" d="M142,158 Q128,164 126,200 L130,255 Q133,272 143,278 L146,258 Q140,254 139,240 L137,200 Q139,178 148,168 Z"/>
+            <path data-zone="sides" class="zone-fill" d="M258,158 Q272,164 274,200 L270,255 Q267,272 257,278 L254,258 Q260,254 261,240 L263,200 Q261,178 252,168 Z"/>
+            <path data-zone="strap" class="zone-fill" fill-rule="evenodd" d="M172,140 Q172,82 200,76 Q228,82 228,140 L219,140 Q219,94 200,90 Q181,94 181,140 Z"/>
+            <rect x="219" y="99" width="14" height="18" rx="2" fill="#B8923F" transform="rotate(10 226 108)"/>
+            <path data-zone="back" class="zone-fill" d="M150,150 Q150,138 165,136 L235,136 Q250,138 250,150 L258,225 Q258,268 200,278 Q142,268 142,225 Z"/>
           </svg>
         </div>
 
         <!-- Frame 6 — Interior / top-down peek -->
         <div class="stage-frame" data-angle="5">
           <svg viewBox="0 0 400 400" role="img" aria-label="Looking down into the open bag">
-            <path data-zone="sides" class="zone-fill" fill-rule="evenodd" d="M200,110 C266,110 308,144 308,200 C308,256 266,290 200,290 C134,290 92,256 92,200 C92,144 134,110 200,110 Z M200,128 C246,128 280,158 280,200 C280,242 246,272 200,272 C154,272 120,242 120,200 C120,158 154,128 200,128 Z"/>
-            <ellipse cx="200" cy="200" rx="80" ry="72" fill="#EFE3CE" stroke="#2f1c10" stroke-width="1"/>
-            <path data-zone="front" class="zone-fill" d="M150,140 Q200,120 250,140 Q246,150 200,152 Q154,150 150,140 Z"/>
-            <path data-zone="back" class="zone-fill" d="M150,260 Q200,280 250,260 Q246,250 200,248 Q154,250 150,260 Z"/>
-            <rect x="100" y="196" width="18" height="10" rx="3" fill="var(--gold)"/>
-            <rect x="282" y="196" width="18" height="10" rx="3" fill="var(--gold)"/>
+            <path data-zone="sides" class="zone-fill" fill-rule="evenodd" d="M200,112 C264,112 304,146 304,200 C304,254 264,288 200,288 C136,288 96,254 96,200 C96,146 136,112 200,112 Z M200,130 C244,130 278,160 278,200 C278,240 244,270 200,270 C156,270 122,240 122,200 C122,160 156,130 200,130 Z"/>
+            <ellipse cx="200" cy="200" rx="78" ry="70" fill="#EFE3CE" stroke="#2a1810" stroke-width="1"/>
+            <path data-zone="front" class="zone-fill" d="M152,142 Q200,122 248,142 Q244,152 200,154 Q156,152 152,142 Z"/>
+            <path data-zone="back" class="zone-fill" d="M152,258 Q200,278 248,258 Q244,248 200,246 Q156,248 152,258 Z"/>
+            <rect x="102" y="196" width="17" height="10" rx="3" fill="#B8923F"/>
+            <rect x="281" y="196" width="17" height="10" rx="3" fill="#B8923F"/>
           </svg>
         </div>
 
       </div>
 
-      <div class="stage-nav">
-        <button class="arrow-btn" id="prevBtn" type="button" aria-label="Previous angle">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        <div class="angle-meta">
-          <div class="angle-label" id="angleLabel" aria-live="polite">Front</div>
-          <div class="angle-dots" id="angleDots" role="tablist" aria-label="Choose angle"></div>
-        </div>
-        <button class="arrow-btn" id="nextBtn" type="button" aria-label="Next angle">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
+      <button class="stage-edge-btn prev" id="prevBtn" type="button" aria-label="Previous angle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="stage-edge-btn next" id="nextBtn" type="button" aria-label="Next angle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+
+      <div class="stage-shadow" aria-hidden="true"></div>
+
+      <div class="stage-foot">
+        <span class="drag-hint" id="angleLabel" aria-live="polite">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3"/></svg>
+          Drag to explore — Front
+        </span>
+        <div class="angle-dots" id="angleDots" role="tablist" aria-label="Choose angle"></div>
       </div>
     </section>
 
-    <!-- ============================= DOCK ============================= -->
-    <section class="dock">
-      <div class="zones" id="zoneList"><!-- populated by JS --></div>
-
-      <div class="price-row">
-        <div>
+    <!-- ============================= PANEL ============================= -->
+    <aside class="panel" aria-label="Bag configuration">
+      <div class="panel-scroll">
+        <div class="panel-top">
+          <span class="eyebrow">Create your own</span>
+          <h1 class="product-name">The Florita Mini</h1>
           <div class="price-figure" id="priceFigure">€245</div>
-          <span class="price-note">Placeholder pricing — final price matrix pending, see brief §7</span>
+          <span class="price-note">Estimated price — placeholder, final matrix pending</span>
         </div>
-        <button class="cta" id="openFormBtn" type="button">Request this design</button>
+
+        <div class="zones" id="zoneList"><!-- populated by JS --></div>
       </div>
 
-      <dl class="summary" id="summaryList"><!-- populated by JS --></dl>
-    </section>
-  </main>
+      <div class="panel-footer">
+        <button class="cta" id="openFormBtn" type="button">Request this design</button>
+        <p class="footnote">No payment now — we'll follow up to confirm details.</p>
+      </div>
+    </aside>
 
-  <footer>
-    Prototype build — swap placeholder illustrations for the commissioned art set before launch. See the project brief for open items.
-  </footer>
+  </div>
 </div>
 
 <!-- ============================= REQUEST FORM ============================= -->
@@ -656,7 +650,7 @@
   "use strict";
 
   var SWATCHES = {
-    cobalt:  { label: "Cobalt Blue", type: "solid",  cssClass: "swatch-cobalt",  fill: "#22437C", surcharge: 0 },
+    cobalt:  { label: "Cobalt Blue", type: "solid",  cssClass: "swatch-cobalt",  fill: "#1F3D73", surcharge: 0 },
     leopard: { label: "Leopard",     type: "pattern", cssClass: "swatch-leopard", fill: "url(#pattern-leopard)", surcharge: 25 },
     zebra:   { label: "Zebra",       type: "pattern", cssClass: "swatch-zebra",   fill: "url(#pattern-zebra)",   surcharge: 25 }
   };
@@ -687,16 +681,27 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // ---------- render: zone dock ----------
+  // ---------- render: zone panel ----------
   var zoneList = document.getElementById("zoneList");
+  var zoneSelectionEls = {};
+
   ZONES.forEach(function(zone){
     var row = document.createElement("div");
     row.className = "zone-row";
 
-    var label = document.createElement("div");
-    label.className = "zone-row-label";
+    var top = document.createElement("div");
+    top.className = "zone-row-top";
+
+    var label = document.createElement("span");
+    label.className = "zone-label";
     label.textContent = zone.label;
-    row.appendChild(label);
+
+    var selection = document.createElement("span");
+    selection.className = "zone-selection";
+    top.appendChild(label);
+    top.appendChild(selection);
+    row.appendChild(top);
+    zoneSelectionEls[zone.key] = selection;
 
     var swatchRow = document.createElement("div");
     swatchRow.className = "swatch-row";
@@ -710,13 +715,9 @@
       btn.className = "swatch " + sw.cssClass;
       btn.setAttribute("role", "radio");
       btn.setAttribute("aria-checked", state.zones[zone.key] === key ? "true" : "false");
-      btn.setAttribute("aria-pressed", state.zones[zone.key] === key ? "true" : "false");
       btn.setAttribute("aria-label", zone.label + ": " + sw.label);
       btn.title = sw.label;
-      btn.innerHTML = '<span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>';
-      btn.addEventListener("click", function(){
-        setZone(zone.key, key);
-      });
+      btn.addEventListener("click", function(){ setZone(zone.key, key); });
       swatchRow.appendChild(btn);
     });
 
@@ -725,21 +726,22 @@
   });
 
   function refreshSwatchStates(){
-    ZONES.forEach(function(zone){
-      var row = zoneList.children[ZONES.indexOf(zone)];
+    ZONES.forEach(function(zone, idx){
+      var row = zoneList.children[idx];
       var buttons = row.querySelectorAll(".swatch");
       buttons.forEach(function(btn, i){
         var key = SWATCH_ORDER[i];
-        var active = state.zones[zone.key] === key;
-        btn.setAttribute("aria-checked", active ? "true" : "false");
-        btn.setAttribute("aria-pressed", active ? "true" : "false");
+        btn.setAttribute("aria-checked", state.zones[zone.key] === key ? "true" : "false");
       });
+      var sw = SWATCHES[state.zones[zone.key]];
+      var deltaHtml = sw.surcharge > 0 ? '<span class="delta">+€' + sw.surcharge + '</span>' : "";
+      zoneSelectionEls[zone.key].innerHTML = sw.label + deltaHtml;
     });
   }
 
   // ---------- render: bag zones across all frames ----------
   // `instant` skips the fade-swap — used for the very first paint on load,
-  // so the bag never flashes empty while the 90ms crossfade is pending.
+  // so the bag never flashes empty while the crossfade is pending.
   function paintZones(instant){
     ZONES.forEach(function(zone){
       var swatch = SWATCHES[state.zones[zone.key]];
@@ -753,7 +755,7 @@
         window.setTimeout(function(){
           el.setAttribute("fill", swatch.fill);
           el.classList.remove("is-swapping");
-        }, 90);
+        }, 150);
       });
     });
   }
@@ -763,7 +765,6 @@
     refreshSwatchStates();
     paintZones(false);
     updatePrice();
-    updateSummary();
   }
 
   // ---------- price ----------
@@ -776,24 +777,11 @@
     priceFigure.textContent = "€" + total;
   }
 
-  // ---------- summary strip ----------
-  var summaryList = document.getElementById("summaryList");
-  function updateSummary(){
-    summaryList.innerHTML = "";
-    ZONES.forEach(function(zone){
-      var dt = document.createElement("dt");
-      dt.textContent = zone.label;
-      var dd = document.createElement("dd");
-      dd.textContent = SWATCHES[state.zones[zone.key]].label;
-      summaryList.appendChild(dt);
-      summaryList.appendChild(dd);
-    });
-  }
-
   // ---------- angle navigation ----------
   var frames = Array.prototype.slice.call(document.querySelectorAll(".stage-frame"));
   var angleLabel = document.getElementById("angleLabel");
   var angleDots = document.getElementById("angleDots");
+  var dragHintIcon = angleLabel.querySelector("svg").outerHTML;
 
   ANGLES.forEach(function(a, i){
     var dot = document.createElement("button");
@@ -814,7 +802,7 @@
       dot.classList.toggle("is-active", idx === state.angle);
       dot.setAttribute("aria-selected", idx === state.angle ? "true" : "false");
     });
-    angleLabel.textContent = ANGLES[state.angle].label;
+    angleLabel.innerHTML = dragHintIcon + " Drag to explore — " + ANGLES[state.angle].label;
   }
 
   document.getElementById("prevBtn").addEventListener("click", function(){ setAngle(state.angle - 1); });
@@ -826,17 +814,35 @@
     if (e.key === "ArrowRight") setAngle(state.angle + 1);
   });
 
-  // touch swipe
+  // ---------- drag / swipe to change angle (mouse + touch) ----------
   (function(){
     var wrap = document.getElementById("stageWrap");
-    var startX = null;
-    wrap.addEventListener("touchstart", function(e){ startX = e.touches[0].clientX; }, { passive: true });
-    wrap.addEventListener("touchend", function(e){
-      if (startX === null) return;
-      var dx = e.changedTouches[0].clientX - startX;
-      if (Math.abs(dx) > 40){ dx < 0 ? setAngle(state.angle + 1) : setAngle(state.angle - 1); }
-      startX = null;
-    }, { passive: true });
+    var dragging = false;
+    var lastX = 0;
+    var STEP = 36; // px of drag per angle step
+
+    function stepFromDelta(dx){
+      if (Math.abs(dx) < STEP) return 0;
+      return dx < 0 ? 1 : -1;
+    }
+
+    wrap.addEventListener("pointerdown", function(e){
+      dragging = true;
+      lastX = e.clientX;
+      wrap.setPointerCapture && wrap.setPointerCapture(e.pointerId);
+    });
+    wrap.addEventListener("pointermove", function(e){
+      if (!dragging) return;
+      var dx = e.clientX - lastX;
+      var step = stepFromDelta(dx);
+      if (step !== 0){
+        setAngle(state.angle + step);
+        lastX = e.clientX;
+      }
+    });
+    ["pointerup", "pointercancel", "pointerleave"].forEach(function(evt){
+      wrap.addEventListener(evt, function(){ dragging = false; });
+    });
   })();
 
   // ---------- request form ----------
@@ -915,8 +921,8 @@
     console.log("Request this design — payload (no backend wired yet):", payload);
 
     recapBox.innerHTML = ZONES.map(function(z){
-      return "<div><b>" + z.label + ":</b> " + SWATCHES[state.zones[z.key]].label + "</div>";
-    }).join("") + "<div style='margin-top:8px'><b>Estimated price:</b> " + priceFigure.textContent + "</div>";
+      return "<div><strong>" + z.label + ":</strong> " + SWATCHES[state.zones[z.key]].label + "</div>";
+    }).join("") + "<div style='margin-top:8px'><strong>Estimated price:</strong> " + priceFigure.textContent + "</div>";
 
     formView.style.display = "none";
     confirmView.style.display = "block";
@@ -926,7 +932,6 @@
   refreshSwatchStates();
   paintZones(true);
   updatePrice();
-  updateSummary();
   setAngle(0);
 })();
 </script>
