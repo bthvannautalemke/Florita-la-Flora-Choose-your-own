@@ -34,6 +34,51 @@ theme and floritalaflora.nl. Send a screenshot (or the theme's style name —
 Stiletto/Luster/Linen/Glimmer/Tapestry) and the palette/typography tokens at
 the top of `<style>` are the only thing that needs updating to match exactly.
 
+## v3 — real brand tokens + redrawn illustration from your reference renders
+
+Two inputs closed most of the remaining gaps:
+
+1. **A screenshot of the actual Shopify theme editor** gave real tokens:
+   white ground, near-black text/chrome, a soft blush-pink accent (from the
+   promo banner) used only for swatch-selection rings — no more placeholder
+   navy blue. CTA buttons switched from a pill shape to Stiletto's sharp,
+   minimal-radius, high-contrast black-on-white style. The wordmark now
+   reads "FLORITA" + lowercase "la" + "FLORA" with wide tracking, matching
+   the real nav casing (font itself is still a safe system stack pending
+   your actual typeface file).
+2. **Four AI-rendered concept grids** (cobalt, leopard, zebra, plain
+   line-art), each showing the same 6 compositions, gave real ground truth
+   for the product: a rounder gathered-top body, round bow loops with a
+   gold floral charm tag, a thin rolled handle with a small buckle, and a
+   wide crossbody strap with a square slide buckle draped diagonally across
+   the front. The SVG was redrawn to match this, and the swatch colors
+   (cobalt blue, leopard, zebra) were resampled from the real renders.
+
+**Important limitation, unchanged from v0.1 of the brief**: those 4 renders
+are finished raster images (baked-in shading per colorway), not neutral
+masks — so they can't be used directly as live-swappable layers in the
+browser. What's here is a redrawn SVG that matches their silhouette and
+hardware, not the renders themselves. True pixel-fidelity to those exact
+renders would need the illustrator to deliver actual separated/maskable
+layers (see brief §6).
+
+**Angle set changed** to match what the reference actually shows, since a
+true 6-angle rotation (front/side/back) was never supplied: Front → Strap
+draped → Strap flat (detail) → Strap hardware (detail) → Back → Bow & tag
+(detail). **Back is still an inferred guess** — no back-view reference has
+been supplied for any version; flagged in the frame's own `aria-label` and
+here.
+
+**QA pass**: went through all 6 angles at high resolution, in the default
+colorway and in an all-one-color stress test (a good way to catch shape
+bugs that contrasting colors hide) and found four real, fixed defects: a
+buckle rotated with the wrong sign (rendered as a floating disconnected
+diamond), a stroke-only buckle outline that didn't read as hardware, a
+visible seam gap between the strap-hardware buckle and the sides shape
+below it, and a crossfade duration slower than a test's wait time (masked
+as a "ghost frame" artifact until the wait was corrected — also shortened
+the real transition from 480ms to 300ms since it felt sluggish regardless).
+
 ## What's real vs. placeholder
 
 - **Interaction, layout, accessibility, pricing logic, and the request
