@@ -6,6 +6,42 @@ project brief. Single self-contained file, no build step, no dependencies.
 Open `index.html` directly in a browser, or serve the folder with any static
 file server.
 
+## v5 — redrawn from the real product photos, not the AI sketches
+
+v3/v4 drew the bag's hardware and closure from the Higgsfield AI-generated
+sketch grids (cobalt/leopard/zebra/line-art), which turned out to invent
+details that don't match the real product: a two-loop decorative bow, and
+two different strap treatments (a thin rolled handle plus a separate wide
+diagonal crossbody strap). Redrawn from the two actual product photographs
+instead (the Paris street photo and the bag-on-the-sofa photo):
+
+- **One consistent strap**, not two — a wide flat band with a row of small
+  gold grommets/eyelets along one edge (like a belt) and a single square
+  gold buckle for length adjustment. Used identically across every angle,
+  since the real photos show one strap design throughout, not a
+  situational thin-handle/wide-strap split.
+- **Loose crossed cords instead of a tied bow** — the real closure is two
+  thin dark cords draped and crossed over the front, not a neat symmetric
+  bow with loops and tails.
+- **A small plain rectangular tag**, not a round gold charm with a floral
+  emblem — that emblem was an invented sketch detail with no confirmation
+  in the real photos, so it's been replaced with an unbranded cream tag
+  until the real tag design is confirmed.
+
+Angles were also re-derived: a true rotation-style set (Front, Front
+angled, Side, Back) plus two detail close-ups the real photos actually
+support well (Strap & hardware, Cords & tag) — replacing v4's angle set,
+which was built around the AI sketch's specific (and partly inconsistent)
+panel compositions rather than an actual camera rotation.
+
+QA note: fixed a real regression found during this pass — the "Front,
+angled" frame's turn effect used `scale()` on a `<g>`, which shrinks
+toward the SVG's origin (x=0) rather than the shape's own center, so the
+sides sliver shapes (positioned for the unscaled panel) detached with a
+visible gap. Replaced with a skew-only transform (which doesn't affect
+x-position) plus asymmetric sliver widths for the turn illusion — avoids
+the whole class of scale/reposition math errors.
+
 ## v2 — Tesla-configurator layout
 
 Rebuilt structurally after feedback that v1 read as an editorial mockup, not
