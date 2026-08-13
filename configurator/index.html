@@ -16,9 +16,9 @@
     --stage-bg: #F6F5F3;
     --panel-bg: #FFFFFF;
     --text: #121212;
-    --text-muted: #7A7670;
+    --text-muted: #6B675F;
     --text-faint: #B8B4AC;
-    --accent: #E58AAE;
+    --accent: #EC4899;
     --cta-bg: #121212;
     --cta-text: #FFFFFF;
     --hairline: #EAE8E3;
@@ -191,7 +191,7 @@
     transition: opacity var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
   }
   .stage-frame-wrap:hover .stage-edge-btn,
-  .stage-edge-btn:focus-visible{ opacity: 1; }
+  .stage-edge-btn:focus-visible{ opacity: 1; color: var(--text); }
   .stage-edge-btn:hover{ color: var(--text); }
   .stage-edge-btn.prev{ left: -8px; }
   .stage-edge-btn.next{ right: -8px; }
@@ -210,7 +210,7 @@
   }
   .drag-hint{
     font-size: 11.5px; letter-spacing:.08em; text-transform: uppercase;
-    color: var(--text-faint);
+    color: var(--text-muted);
     display:flex; align-items:center; gap:6px;
   }
   .drag-hint svg{ width:13px; height:13px; }
@@ -339,7 +339,7 @@
   .cta:hover{ opacity:.85; }
   .cta:active{ transform: scale(.99); }
   .footnote{
-    text-align:center; font-size: 11.5px; color: var(--text-faint);
+    text-align:center; font-size: 11.5px; color: var(--text-muted);
     margin-top: 10px;
   }
 
@@ -421,7 +421,7 @@
     margin-bottom: 18px;
   }
   .dev-note{
-    font-size: 11px; color: var(--text-faint); border-top: 1px dashed var(--hairline);
+    font-size: 11px; color: var(--text-muted); border-top: 1px dashed var(--hairline);
     padding-top: 12px; margin-top: 4px; text-align:left;
   }
 </style>
