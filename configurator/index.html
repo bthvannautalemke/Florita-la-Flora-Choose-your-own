@@ -489,22 +489,25 @@
         <!-- Frame 1 — Front -->
         <div class="stage-frame is-active" data-angle="0">
           <svg viewBox="0 0 400 400" role="img" aria-label="Front view of the bag">
-            <path data-zone="sides" class="zone-fill" d="M148,164 Q134,170 132,205 L136,258 Q139,274 149,280 L153,260 Q146,256 145,242 L143,205 Q145,182 154,172 Z"/>
-            <path data-zone="sides" class="zone-fill" d="M252,164 Q266,170 268,205 L264,258 Q261,274 251,280 L247,260 Q254,256 255,242 L257,205 Q255,182 246,172 Z"/>
-            <path data-zone="strap" class="zone-fill" fill-rule="evenodd" d="M170,138 Q170,80 200,74 Q230,80 230,138 L221,138 Q221,92 200,88 Q179,92 179,138 Z"/>
-            <rect x="163" y="110" width="11" height="15" rx="2" fill="#C9A227" transform="rotate(15 168.5 117.5)"/>
-            <path data-zone="front" class="zone-fill" d="M148,158 Q146,140 164,136 L236,136 Q254,140 252,158 L260,232 Q260,276 200,284 Q140,276 140,232 Z"/>
+            <path data-zone="sides" class="zone-fill" d="M146,230 Q128,236 126,258 Q125,274 136,282 Q145,287 152,280 L150,262 Q144,250 146,230 Z"/>
+            <path data-zone="sides" class="zone-fill" d="M254,230 Q272,236 274,258 Q275,274 264,282 Q255,287 248,280 L250,262 Q256,250 254,230 Z"/>
+            <path data-zone="strap" class="zone-fill" fill="none" stroke-width="11" stroke-linecap="round" d="M170,150 Q150,96 172,76 Q188,62 202,80 Q222,104 226,146"/>
+            <path data-zone="strap" class="zone-fill" fill="none" stroke-width="5" stroke-linecap="round" d="M164,156 L154,180"/>
+            <circle cx="167" cy="154" r="6.5" fill="none" stroke="#C9A227" stroke-width="3.5" data-fixed="ring"/>
+            <path data-zone="front" class="zone-fill" d="M158,152 Q200,134 242,152 Q270,163 271,200 Q272,242 250,272 Q225,297 200,298 Q175,297 150,272 Q128,242 129,200 Q130,163 158,152 Z"/>
             <g fill="#241407" data-fixed="bow">
-              <path d="M200,150 C184,130 158,134 156,152 C158,170 184,172 200,150 Z"/>
-              <path d="M200,150 C216,130 242,134 244,152 C242,170 216,172 200,150 Z"/>
-              <path d="M195,157 C186,170 178,184 182,198 C190,186 197,172 200,160 Z"/>
-              <path d="M205,157 C214,170 222,184 218,198 C210,186 203,172 200,160 Z"/>
-              <circle cx="200" cy="150" r="7"/>
+              <path d="M200,180 C180,164 160,156 160,170 C160,184 182,190 200,184 Z"/>
+              <path d="M200,180 C220,164 240,156 240,170 C240,184 218,190 200,184 Z"/>
+              <circle cx="200" cy="182" r="6"/>
+            </g>
+            <g fill="none" stroke="#241407" stroke-width="4" stroke-linecap="round" data-fixed="bow">
+              <path d="M196,187 C190,202 183,216 188,232"/>
+              <path d="M204,187 C210,202 217,216 212,232"/>
             </g>
             <g data-fixed="tag">
-              <circle cx="188" cy="153" r="3.2" fill="none" stroke="#C9A227" stroke-width="2"/>
-              <rect x="180" y="156" width="15" height="15" rx="3" fill="#C9A227"/>
-              <circle cx="187.5" cy="163.5" r="2.4" fill="#8A6A1B"/>
+              <circle cx="150" cy="170" r="3.5" fill="none" stroke="#C9A227" stroke-width="2.5"/>
+              <rect x="142" y="174" width="16" height="16" rx="3" fill="#C9A227"/>
+              <circle cx="150" cy="182" r="2" fill="#8A6A1B"/>
             </g>
           </svg>
         </div>
@@ -512,83 +515,112 @@
         <!-- Frame 2 — Front, strap draped -->
         <div class="stage-frame" data-angle="1">
           <svg viewBox="0 0 400 400" role="img" aria-label="Front view with the crossbody strap draped across the bag">
-            <path data-zone="sides" class="zone-fill" d="M148,164 Q134,170 132,205 L136,258 Q139,274 149,280 L153,260 Q146,256 145,242 L143,205 Q145,182 154,172 Z"/>
-            <path data-zone="sides" class="zone-fill" d="M252,164 Q266,170 268,205 L264,258 Q261,274 251,280 L247,260 Q254,256 255,242 L257,205 Q255,182 246,172 Z"/>
-            <path data-zone="strap" class="zone-fill" fill-rule="evenodd" d="M170,138 Q170,80 200,74 Q230,80 230,138 L221,138 Q221,92 200,88 Q179,92 179,138 Z"/>
-            <rect x="163" y="110" width="11" height="15" rx="2" fill="#C9A227" transform="rotate(15 168.5 117.5)"/>
-            <path data-zone="front" class="zone-fill" d="M148,158 Q146,140 164,136 L236,136 Q254,140 252,158 L260,232 Q260,276 200,284 Q140,276 140,232 Z"/>
+            <path data-zone="sides" class="zone-fill" d="M146,230 Q128,236 126,258 Q125,274 136,282 Q145,287 152,280 L150,262 Q144,250 146,230 Z"/>
+            <path data-zone="sides" class="zone-fill" d="M254,230 Q272,236 274,258 Q275,274 264,282 Q255,287 248,280 L250,262 Q256,250 254,230 Z"/>
+            <path data-zone="strap" class="zone-fill" d="M160.8,160.4 L183.2,143.6 L311.2,313.6 L288.8,330.4 Z"/>
+            <path data-zone="strap" class="zone-fill" fill="none" stroke-width="11" stroke-linecap="round" d="M170,150 Q150,96 172,76 Q188,62 202,80 Q222,104 226,146"/>
+            <path data-zone="strap" class="zone-fill" fill="none" stroke-width="5" stroke-linecap="round" d="M164,156 L154,180"/>
+            <circle cx="167" cy="154" r="6.5" fill="none" stroke="#C9A227" stroke-width="3.5" data-fixed="ring"/>
+            <path data-zone="front" class="zone-fill" d="M158,152 Q200,134 242,152 Q270,163 271,200 Q272,242 250,272 Q225,297 200,298 Q175,297 150,272 Q128,242 129,200 Q130,163 158,152 Z"/>
+            <g fill="#241407" data-fixed="grommets">
+              <circle cx="210.4" cy="203.0" r="3.4"/>
+              <circle cx="236.0" cy="237.0" r="3.4"/>
+              <circle cx="259.0" cy="267.6" r="3.4"/>
+              <circle cx="282.1" cy="298.2" r="3.4"/>
+            </g>
             <g fill="#241407" data-fixed="bow">
-              <path d="M200,150 C184,130 158,134 156,152 C158,170 184,172 200,150 Z"/>
-              <path d="M200,150 C216,130 242,134 244,152 C242,170 216,172 200,150 Z"/>
-              <path d="M195,157 C186,170 178,184 182,198 C190,186 197,172 200,160 Z"/>
-              <path d="M205,157 C214,170 222,184 218,198 C210,186 203,172 200,160 Z"/>
-              <circle cx="200" cy="150" r="7"/>
+              <path d="M200,180 C180,164 160,156 160,170 C160,184 182,190 200,184 Z"/>
+              <path d="M200,180 C220,164 240,156 240,170 C240,184 218,190 200,184 Z"/>
+              <circle cx="200" cy="182" r="6"/>
+            </g>
+            <g fill="none" stroke="#241407" stroke-width="4" stroke-linecap="round" data-fixed="bow">
+              <path d="M196,187 C190,202 183,216 188,232"/>
+              <path d="M204,187 C210,202 217,216 212,232"/>
             </g>
             <g data-fixed="tag">
-              <circle cx="188" cy="153" r="3.2" fill="none" stroke="#C9A227" stroke-width="2"/>
-              <rect x="180" y="156" width="15" height="15" rx="3" fill="#C9A227"/>
-              <circle cx="187.5" cy="163.5" r="2.4" fill="#8A6A1B"/>
+              <circle cx="150" cy="170" r="3.5" fill="none" stroke="#C9A227" stroke-width="2.5"/>
+              <rect x="142" y="174" width="16" height="16" rx="3" fill="#C9A227"/>
+              <circle cx="150" cy="182" r="2" fill="#8A6A1B"/>
             </g>
-            <path data-zone="strap" class="zone-fill" d="M155,84 L182,84 L267,282 Q272,292 261,294 L246,296 Q252,286 246,278 Z"/>
-            <rect x="166" y="90" width="24" height="30" rx="4" fill="#C9A227" stroke="#8A6A1B" stroke-width="1.5" transform="rotate(24 178 105)"/>
-            <rect x="171" y="97" width="14" height="17" rx="2" fill="none" stroke="#8A6A1B" stroke-width="2.5" transform="rotate(24 178 105)"/>
+            <g data-fixed="buckle">
+              <rect x="167" y="141" width="26" height="34" rx="4" fill="#C9A227" stroke="#8A6A1B" stroke-width="1.5" transform="rotate(15 180 158)"/>
+              <rect x="173.5" y="148" width="13" height="20" rx="2" fill="none" stroke="#8A6A1B" stroke-width="3" transform="rotate(15 180 158)"/>
+            </g>
           </svg>
         </div>
 
         <!-- Frame 3 — Strap, laid flat -->
         <div class="stage-frame" data-angle="2">
           <svg viewBox="0 0 400 400" role="img" aria-label="The strap laid flat, showing the bow laced through it">
-            <path data-zone="strap" class="zone-fill" d="M95,165 L305,165 Q319,165 319,197 Q319,229 305,229 L95,229 Q81,229 81,197 Q81,165 95,165 Z"/>
-            <rect x="80" y="173" width="40" height="48" rx="6" fill="#C9A227" stroke="#8A6A1B" stroke-width="1.5"/>
-            <rect x="90" y="184" width="20" height="26" rx="3" fill="none" stroke="#8A6A1B" stroke-width="3.5"/>
+            <path data-zone="strap" class="zone-fill" fill-rule="evenodd" d="M129,165 L271,165 A34,34 0 0 1 271,233 L129,233 A34,34 0 0 1 129,165 Z M163,181 L237,181 A18,18 0 0 1 237,217 L163,217 A18,18 0 0 1 163,181 Z"/>
+            <g fill="#241407" data-fixed="grommets">
+              <circle cx="178" cy="225" r="3"/>
+              <circle cx="200" cy="228" r="3"/>
+              <circle cx="222" cy="225" r="3"/>
+            </g>
+            <g data-fixed="buckle">
+              <rect x="110" y="174" width="44" height="50" rx="7" fill="#C9A227" stroke="#8A6A1B" stroke-width="1.5"/>
+              <rect x="120" y="185" width="24" height="28" rx="4" fill="none" stroke="#8A6A1B" stroke-width="3"/>
+            </g>
             <g fill="#241407" data-fixed="bow">
-              <path d="M200,197 C190,183 172,185 170,197 C172,209 190,211 200,197 Z"/>
-              <path d="M200,197 C210,183 228,185 230,197 C228,209 210,211 200,197 Z"/>
-              <path d="M196,203 C190,213 185,224 189,235 C195,225 199,214 201,205 Z"/>
-              <path d="M204,203 C210,213 215,224 211,235 C205,225 201,214 199,205 Z"/>
-              <circle cx="200" cy="197" r="5.5"/>
+              <path d="M200,197 C182,183 164,177 164,189 C164,201 184,206 200,201 Z"/>
+              <path d="M200,197 C218,183 236,177 236,189 C236,201 216,206 200,201 Z"/>
+              <circle cx="200" cy="195" r="5.5"/>
+            </g>
+            <g fill="none" stroke="#241407" stroke-width="4" stroke-linecap="round" data-fixed="bow">
+              <path d="M196,203 C190,215 184,228 188,246"/>
+              <path d="M204,203 C210,215 216,228 212,246"/>
             </g>
           </svg>
         </div>
 
         <!-- Frame 4 — Strap hardware & attachment -->
         <div class="stage-frame" data-angle="3">
-          <svg viewBox="0 0 400 400" role="img" aria-label="Close-up of the strap buckle and where it attaches to the bag">
-            <path data-zone="sides" class="zone-fill" d="M148,136 Q175,118 200,126 Q225,118 252,136 Q266,198 250,260 Q200,286 150,260 Q134,198 148,136 Z"/>
-            <path data-zone="strap" class="zone-fill" d="M186,70 L214,70 L214,128 L186,128 Z"/>
-            <rect x="181" y="90" width="38" height="40" rx="5" fill="#C9A227" stroke="#8A6A1B" stroke-width="1.5"/>
-            <rect x="190" y="99" width="20" height="22" rx="3" fill="none" stroke="#8A6A1B" stroke-width="3"/>
+          <svg viewBox="140 40 190 190" role="img" aria-label="Close-up of the strap buckle and where it attaches to the bag">
+            <path data-zone="strap" class="zone-fill" d="M187,40 L213,40 L213,152 L187,152 Z"/>
+            <path data-zone="front" class="zone-fill" d="M158,152 Q200,134 242,152 Q270,163 271,200 Q272,242 250,272 Q225,297 200,298 Q175,297 150,272 Q128,242 129,200 Q130,163 158,152 Z"/>
+            <g fill="#241407" data-fixed="grommets">
+              <circle cx="200" cy="118" r="3.4"/>
+              <circle cx="200" cy="140" r="3.4"/>
+            </g>
+            <g data-fixed="buckle">
+              <rect x="185" y="60" width="30" height="40" rx="5" fill="#C9A227" stroke="#8A6A1B" stroke-width="1.5"/>
+              <rect x="192" y="68" width="16" height="24" rx="3" fill="none" stroke="#8A6A1B" stroke-width="3"/>
+            </g>
           </svg>
         </div>
 
         <!-- Frame 5 — Back (inferred — no back reference supplied yet) -->
         <div class="stage-frame" data-angle="4">
           <svg viewBox="0 0 400 400" role="img" aria-label="Back view of the bag (best-guess pending a real back-view reference)">
-            <path data-zone="sides" class="zone-fill" d="M148,164 Q134,170 132,205 L136,258 Q139,274 149,280 L153,260 Q146,256 145,242 L143,205 Q145,182 154,172 Z"/>
-            <path data-zone="sides" class="zone-fill" d="M252,164 Q266,170 268,205 L264,258 Q261,274 251,280 L247,260 Q254,256 255,242 L257,205 Q255,182 246,172 Z"/>
-            <path data-zone="strap" class="zone-fill" fill-rule="evenodd" d="M170,138 Q170,80 200,74 Q230,80 230,138 L221,138 Q221,92 200,88 Q179,92 179,138 Z"/>
-            <rect x="163" y="110" width="11" height="15" rx="2" fill="#C9A227" transform="rotate(15 168.5 117.5)"/>
-            <path data-zone="back" class="zone-fill" d="M148,158 Q146,140 164,136 L236,136 Q254,140 252,158 L260,232 Q260,276 200,284 Q140,276 140,232 Z"/>
+            <path data-zone="sides" class="zone-fill" d="M146,230 Q128,236 126,258 Q125,274 136,282 Q145,287 152,280 L150,262 Q144,250 146,230 Z"/>
+            <path data-zone="sides" class="zone-fill" d="M254,230 Q272,236 274,258 Q275,274 264,282 Q255,287 248,280 L250,262 Q256,250 254,230 Z"/>
+            <path data-zone="strap" class="zone-fill" fill="none" stroke-width="11" stroke-linecap="round" d="M170,150 Q150,96 172,76 Q188,62 202,80 Q222,104 226,146"/>
+            <path data-zone="strap" class="zone-fill" fill="none" stroke-width="5" stroke-linecap="round" d="M164,156 L154,180"/>
+            <circle cx="167" cy="154" r="6.5" fill="none" stroke="#C9A227" stroke-width="3.5" data-fixed="ring"/>
+            <path data-zone="back" class="zone-fill" d="M158,152 Q200,134 242,152 Q270,163 271,200 Q272,242 250,272 Q225,297 200,298 Q175,297 150,272 Q128,242 129,200 Q130,163 158,152 Z"/>
           </svg>
         </div>
 
         <!-- Frame 6 — Detail: bow & tag -->
         <div class="stage-frame" data-angle="5">
-          <svg viewBox="150 65 150 150" role="img" aria-label="Close-up of the bow and brand tag">
-            <rect x="100" y="60" width="260" height="230" data-zone="front" class="zone-fill"/>
-            <path data-zone="strap" class="zone-fill" fill-rule="evenodd" d="M170,138 Q170,80 200,74 Q230,80 230,138 L221,138 Q221,92 200,88 Q179,92 179,138 Z"/>
-            <rect x="163" y="110" width="11" height="15" rx="2" fill="#C9A227" transform="rotate(15 168.5 117.5)"/>
+          <svg viewBox="125 55 190 190" role="img" aria-label="Close-up of the bow and brand tag">
+            <rect x="100" y="40" width="260" height="230" data-zone="front" class="zone-fill"/>
+            <path data-zone="strap" class="zone-fill" fill="none" stroke-width="11" stroke-linecap="round" d="M170,150 Q150,96 172,76 Q188,62 202,80 Q222,104 226,146"/>
+            <circle cx="167" cy="154" r="6.5" fill="none" stroke="#C9A227" stroke-width="3.5" data-fixed="ring"/>
             <g fill="#241407" data-fixed="bow">
-              <path d="M200,150 C184,130 158,134 156,152 C158,170 184,172 200,150 Z"/>
-              <path d="M200,150 C216,130 242,134 244,152 C242,170 216,172 200,150 Z"/>
-              <path d="M195,157 C186,170 178,184 182,198 C190,186 197,172 200,160 Z"/>
-              <path d="M205,157 C214,170 222,184 218,198 C210,186 203,172 200,160 Z"/>
-              <circle cx="200" cy="150" r="7"/>
+              <path d="M200,180 C180,164 160,156 160,170 C160,184 182,190 200,184 Z"/>
+              <path d="M200,180 C220,164 240,156 240,170 C240,184 218,190 200,184 Z"/>
+              <circle cx="200" cy="182" r="6"/>
+            </g>
+            <g fill="none" stroke="#241407" stroke-width="4" stroke-linecap="round" data-fixed="bow">
+              <path d="M196,187 C190,202 183,216 188,232"/>
+              <path d="M204,187 C210,202 217,216 212,232"/>
             </g>
             <g data-fixed="tag">
-              <circle cx="188" cy="153" r="3.2" fill="none" stroke="#C9A227" stroke-width="2"/>
-              <rect x="180" y="156" width="15" height="15" rx="3" fill="#C9A227"/>
-              <circle cx="187.5" cy="163.5" r="2.4" fill="#8A6A1B"/>
+              <circle cx="150" cy="170" r="3.5" fill="none" stroke="#C9A227" stroke-width="2.5"/>
+              <rect x="142" y="174" width="16" height="16" rx="3" fill="#C9A227"/>
+              <circle cx="150" cy="182" r="2" fill="#8A6A1B"/>
             </g>
           </svg>
         </div>
@@ -796,13 +828,17 @@
       var swatch = SWATCHES[state.zones[zone.key]];
       var els = document.querySelectorAll('[data-zone="' + zone.key + '"]');
       els.forEach(function(el){
+        // The handle is drawn as a stroked tube (fill="none" permanently) so
+        // it takes the swatch on `stroke` instead; every other zone shape is
+        // a filled silhouette and takes it on `fill`, as before.
+        var attr = el.getAttribute("fill") === "none" ? "stroke" : "fill";
         if (reduceMotion || instant){
-          el.setAttribute("fill", swatch.fill);
+          el.setAttribute(attr, swatch.fill);
           return;
         }
         el.classList.add("is-swapping");
         window.setTimeout(function(){
-          el.setAttribute("fill", swatch.fill);
+          el.setAttribute(attr, swatch.fill);
           el.classList.remove("is-swapping");
         }, 150);
       });
